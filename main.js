@@ -1,6 +1,6 @@
 import './style.css'
-
 import Split from 'split-grid'
+import { encode, decode } from 'js-base64';
 
 const $ = selector => document.querySelector(selector)
 
@@ -25,15 +25,39 @@ $js.addEventListener('input', update)
 $css.addEventListener('input', update)
 $html.addEventListener('input', update)
 
-function update () {
-  const html = createHtml()
-  $('iframe').setAttribute('srcdoc', html)
+function init (){
+  const { pathname } = window.location
+
+
+  const [rawHtml, rawCss, rawJs] = pathname.slice(1).split('%7C')
+
+  
+  const html = decode(rawHtml)
+  const css = decode(rawCss)
+  const js = decode(rawJs)
+
+  $html.value = html
+  $css.value = css
+  $js.value = js
+
+  const htmlForPreviw = createHtml({html, css, js})
+  $('iframe').setAttribute('srcdoc', htmlForPreviw)
 }
 
-const createHtml = () => {
+function update () {
   const html = $html.value
   const css = $css.value
   const js = $js.value
+
+  const hashedCode = `${encode(html)}|${encode(css)}|${encode(js)}`
+
+  window.history.replaceState(null, null, `/${hashedCode}`)
+
+  const htmlForPreviw = createHtml({html, css, js})
+  $('iframe').setAttribute('srcdoc', htmlForPreviw)
+}
+
+const createHtml = ({html, css, js}) => {
   return `
     <!doctype html>
       <html lang="es">
@@ -42,12 +66,14 @@ const createHtml = () => {
           ${css}
           </style>
         </head>
-        <script>
-        ${js}
-        </script>
         <body>
-        ${html}
+          ${html}
+        <script>
+          ${js}
+        </script>
         </body>
         </html>
         `
 }
+
+init()
