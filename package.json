@@ -6,10 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "co": "sui-mono commit",
+    "lint": "standard"
   },
   "devDependencies": {
-    "vite": "^5.3.4"
+    "vite": "^5.3.4",
+    "@s-ui/mono": "2",
+    "standard": "16.0.3"
   },
   "dependencies": {
     "js-base64": "^3.7.7",
