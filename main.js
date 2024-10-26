@@ -1,6 +1,16 @@
 import './style.css'
 import Split from 'split-grid'
 import { encode, decode } from 'js-base64';
+import * as monaco from 'monaco-editor';
+import HtmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker'
+
+window.MonacoEnvironment = {
+  getWorker (_, label) {
+    if ( label === 'html' ) {
+      return new HtmlWorker
+    }
+  }
+}
 
 const $ = selector => document.querySelector(selector)
 
@@ -21,9 +31,19 @@ const $js = $('#js')
 const $css = $('#css')
 const $html = $('#html')
 
+const htmlEditor = monaco.editor.create($html, {
+  value: '',
+  language: 'html',
+  theme: 'vs-dark',
+  fontSize: 18,
+})
+
+
+
+htmlEditor.onDidChangeModelContent(update)
 $js.addEventListener('input', update)
 $css.addEventListener('input', update)
-$html.addEventListener('input', update)
+
 
 function init (){
   const { pathname } = window.location
@@ -32,7 +52,7 @@ function init (){
   const [rawHtml, rawCss, rawJs] = pathname.slice(1).split('%7C')
 
   
-  const html = decode(rawHtml)
+  // const html = decode(rawHtml)
   const css = decode(rawCss)
   const js = decode(rawJs)
 
@@ -45,7 +65,7 @@ function init (){
 }
 
 function update () {
-  const html = $html.value
+  const html = htmlEditor.getValue()
   const css = $css.value
   const js = $js.value
 

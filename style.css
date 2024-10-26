@@ -48,6 +48,21 @@ textarea {
   resize: none;
 }
 
+.editor{
+  position: relative;
+}
+
+.editor::after{
+  content: '';
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 5;
+  width: 32px;
+  height: 32px;
+  background-repeat: no-repeat;
+}
+
 #js {
   background-image: url('/assets/js.svg');
 }
@@ -56,7 +71,7 @@ textarea {
   background-image: url('/assets/css.svg');
 }
 
-#html {
+#html::after {
   background-image: url('/assets/html.svg');
 }
 textarea:focus {
@@ -88,3 +103,4 @@ textarea:focus {
 .gutter-row-1 {
   grid-row: 2;
 }
+
