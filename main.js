@@ -47,6 +47,9 @@ const COMMON_EDITOR_OPTIONS = {
   fontSize: 18,
   automaticLayout: true,
   theme: 'vs-dark',
+  minimap: {
+    enabled: false,
+  },
 }
 
 

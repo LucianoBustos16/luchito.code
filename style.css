@@ -35,19 +35,6 @@ iframe {
   background: #fff;
 }
 
-textarea {
-  background-color: #282434;
-  background-position: calc(100% - 16px) calc(100% - 16px);
-  background-size: 32px;
-  background-repeat: no-repeat;
-  color: #fff;
-  font-size: 24px;
-  font-family: monospace;
-  height: 100%;
-  width: 100%;
-  padding: 24px;
-  resize: none;
-}
 
 .editor{
   position: relative;
@@ -75,14 +62,11 @@ textarea {
 #html::after {
   background-image: url('/assets/html.svg');
 }
-textarea:focus {
-  outline: 0;
-}
 
 .grid {
   display: grid;
-  grid-template-rows: 1fr 4px 1fr;
-  grid-template-columns: 1fr 4px 1fr;
+  grid-template-rows: 49.8% 0.4% 49.8%;
+  grid-template-columns: 49.8% 0.4% 49.8%;
   height: 100vh;
 }
 
