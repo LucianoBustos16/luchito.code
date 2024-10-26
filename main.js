@@ -16,19 +16,6 @@ window.MonacoEnvironment = {
 
 const $ = selector => document.querySelector(selector)
 
-Split({
-  columnGutters: [{
-      track: 1,
-      element: $('.gutter-col-1'),
-  }],
-  rowGutters: [{
-      track: 1,
-      element: $('.gutter-row-1'),
-  }]
-})
-
-
-
 const $js = $('#js')
 const $css = $('#css')
 const $html = $('#html')
@@ -47,6 +34,11 @@ const COMMON_EDITOR_OPTIONS = {
   fontSize: 18,
   automaticLayout: true,
   theme: 'vs-dark',
+  scrollBeyondLastLine: false,
+  roundedSelection: false,
+  padding: {
+    top: 16
+  },
   minimap: {
     enabled: false,
   },
@@ -69,6 +61,17 @@ const CssEditor = monaco.editor.create($css, {
   value: css,
   language: 'css',
   ... COMMON_EDITOR_OPTIONS
+})
+
+Split({
+  columnGutters: [{
+      track: 1,
+      element: $('.gutter-col-1'),
+  }],
+  rowGutters: [{
+      track: 1,
+      element: $('.gutter-row-1'),
+  }]
 })
 
 HtmlEditor.onDidChangeModelContent(update)
@@ -103,7 +106,7 @@ function createHtml ({html, css, js}) {
         </head>
         <body>
           ${html}
-        <script>
+        <script type="module">
           ${js}
         </script>
         </body>
