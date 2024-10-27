@@ -13,12 +13,25 @@
   "devDependencies": {
     "@s-ui/mono": "2",
     "standard": "16.0.3",
+    "postcss-nesting": "^8.0.1",
     "vite": "^5.3.4"
   },
   "dependencies": {
     "emmet-monaco-es": "^4.7.6",
     "js-base64": "^3.7.7",
     "monaco-editor": "^0.52.0",
-    "split-grid": "^1.0.11"
+    "hotkeys-js": "3.8.7",
+    "split-grid": "^1.0.11",
+    "zustand": "3.5.10"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/standard/eslintrc.json"
+    ]
+  },
+  "postcss": {
+    "plugins": {
+      "postcss-nesting": {}
+    }
   }
 }
