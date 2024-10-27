@@ -1,5 +1,8 @@
+:root{
+  --bg-color: #2d323c;
+}
 body {
-  background-color: #666;
+  background-color: var(--bg-color);
   color: #333;
   font-size: 14px;
   line-height: 1.4;
@@ -25,6 +28,8 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: grid;
+  grid-template-columns: 56px 1fr;
 }
 
 
@@ -32,7 +37,7 @@ iframe {
   width: 100%;
   height: 100%;
   border: 0;
-  background: #fff;
+  background: #2d323c;
 }
 
 
@@ -90,3 +95,33 @@ iframe {
   grid-row: 2;
 }
 
+aside {
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+aside button {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  width: 100%;
+  opacity: .5;
+  transition: opacity .1s ease;
+  padding: 16px;
+}
+aside button:hover {
+  opacity: 1;
+}
+aside svg {
+  width: 24px;
+  height: 24px;
+}
+aside header,
+aside footer {
+  display: flex;
+  justify-content: center;
+}
+/* .view {
+  
+} */

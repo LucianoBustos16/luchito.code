@@ -11,11 +11,12 @@
     "lint": "standard"
   },
   "devDependencies": {
-    "vite": "^5.3.4",
     "@s-ui/mono": "2",
-    "standard": "16.0.3"
+    "standard": "16.0.3",
+    "vite": "^5.3.4"
   },
   "dependencies": {
+    "emmet-monaco-es": "^4.7.6",
     "js-base64": "^3.7.7",
     "monaco-editor": "^0.52.0",
     "split-grid": "^1.0.11"
