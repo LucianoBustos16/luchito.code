@@ -5,8 +5,8 @@ const setLocalStorage = (key, value) =>
   window.localStorage.setItem(key, JSON.stringify(value))
 
 const appInitialState = getLocalStorage('appInitialState') || {
-  fontSize: 18,
-  lineNumbers: 'off',
+  fontSize: 16,
+  lineNumbers: 'on',
   minimap: false,
   theme: 'vs-dark',
   wordWrap: 'on'

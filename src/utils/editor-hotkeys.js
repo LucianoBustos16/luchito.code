@@ -1,5 +1,6 @@
 import * as monaco from 'monaco-editor'
 import { $ } from './dom.js'
+
 export const initEditorHotKeys = ({ htmlEditor, jsEditor, cssEditor }) => {
   const editors = [htmlEditor, jsEditor, cssEditor]
   editors.forEach(editor => {
