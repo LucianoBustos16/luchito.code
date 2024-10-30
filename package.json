@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "emmet-monaco-es": "^4.7.6",
-    "js-base64": "^3.7.7",
+    "js-base64": "3.7.7",
     "monaco-editor": "^0.52.0",
     "hotkeys-js": "3.8.7",
     "split-grid": "^1.0.11",
