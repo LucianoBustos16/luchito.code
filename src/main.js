@@ -15,9 +15,11 @@ const $js = $('#js')
 const $css = $('#css')
 const $html = $('#html')
 
-const { pathname } = window.location
+const { hash, pathname } = window.location
 
-const [rawHtml, rawCss, rawJs] = pathname.slice(1).split('%7C')
+// Soporta links nuevos (#...) y los viejos (/...)
+const rawCode = hash ? hash.slice(1) : pathname.slice(1)
+const [rawHtml, rawCss, rawJs] = rawCode.split(/\||%7C/i)
 
 const html = rawHtml ? decode(rawHtml) : ''
 const css = rawCss ? decode(rawCss) : ''
@@ -27,22 +29,18 @@ const htmlEditor = createEditor({ domElement: $html, language: 'html', value: ht
 const cssEditor = createEditor({ domElement: $css, language: 'css', value: css })
 const jsEditor = createEditor({ domElement: $js, language: 'javascript', value: js })
 
-subscribe(state => {
-  console.log('subscribe', state)
-  const EDITORS = [htmlEditor, cssEditor, jsEditor]
-  EDITORS.forEach(editor => {
-    const { minimap, ...restOfOptions } = state
-    const newOptions = {
-      ...restOfOptions,
-      minimap: {
-        enabled: minimap
-      }
-    }
-    editor.updateOptions({
-      ...editor.getRawOptions(),
-      ...newOptions
-    })
-  })
+const EDITORS = [htmlEditor, cssEditor, jsEditor]
+
+subscribe(({ fontSize, lineNumbers, minimap, theme, wordWrap }) => {
+  const newOptions = {
+    fontSize,
+    lineNumbers,
+    theme,
+    wordWrap,
+    minimap: { enabled: minimap }
+  }
+
+  EDITORS.forEach(editor => editor.updateOptions(newOptions))
 })
 
 const MS_UPDATE_DEBOUNCED_TIME = 200
@@ -63,9 +61,9 @@ function update () {
   const css = cssEditor.getValue()
   const js = jsEditor.getValue()
 
-  const hashedCode = `${encode(html)}|${encode(css)}|${encode(js)}`
+  const hashedCode = `${encode(html, true)}|${encode(css, true)}|${encode(js, true)}`
 
-  window.history.replaceState(null, null, `/${hashedCode}`)
+  window.history.replaceState(null, '', `/#${hashedCode}`)
 
   const htmlForPreview = createHtml({ html, js, css })
   $('iframe').setAttribute('srcdoc', htmlForPreview)
